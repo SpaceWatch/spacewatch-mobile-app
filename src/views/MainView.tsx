@@ -1,11 +1,10 @@
 import * as Notifications from 'expo-notifications';
-import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import React, { useEffect } from 'react';
 
 
-import { scheduleNotification, registerForPushNotificationsAsync, useNotificationSubscription, initNotifications} from '../common/pushNotifications';
-import { registerBackgroundTask} from '../common/backgroundTasks';
-import {printExchangeRate, sendLuna} from "../common/testApi";
+import { initNotifications } from '../common/pushNotifications';
+import { registerBackgroundTask } from '../common/backgroundTasks';
+import MainRouter from "../MainRouter";
 
 
 Notifications.setNotificationHandler({
@@ -26,24 +25,6 @@ export default function MainView() {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      <Button
-        title="HELP"
-        onPress={async () => {
-          await scheduleNotification();
-        }}
-      />
-        <Button
-            title="Transfer to Lai Wei wallet"
-            onPress={async () => {
-                await scheduleNotification('Trasnfer Success', await sendLuna());
-            }}
-        />
-    </View>
+    <MainRouter />
   );
 }

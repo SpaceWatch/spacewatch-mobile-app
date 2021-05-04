@@ -15,16 +15,16 @@ export const initNotifications = async (): Promise<string | undefined> => {
   return expoPushToken;
 }
 
-export const scheduleNotification = async () => {
+export const scheduleNotification = async (title?: string, body?: string) => {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: 'You just got liquidated on Anchor BEECH',
-      body: 'Go repay your loan you degen',
+      title: title ? title : 'You just got liquidated on Anchor BEECH',
+      body: body ? body : 'Go repay your loan you degen',
       data: { data: 'goes here' },
     },
-    trigger: { 
+    trigger: {
       seconds: 1, // Execute after delay
-    }, 
+    },
   });
 }
 

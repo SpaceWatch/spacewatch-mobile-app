@@ -5,6 +5,7 @@ import { Text, View, Button, Platform } from 'react-native';
 
 import { scheduleNotification, registerForPushNotificationsAsync, useNotificationSubscription, initNotifications} from '../common/pushNotifications';
 import { registerBackgroundTask} from '../common/backgroundTasks';
+import {printExchangeRate, sendLuna} from "../common/testApi";
 
 
 Notifications.setNotificationHandler({
@@ -37,6 +38,12 @@ export default function MainView() {
           await scheduleNotification();
         }}
       />
+        <Button
+            title="Transfer to Lai Wei wallet"
+            onPress={async () => {
+                await scheduleNotification('Trasnfer Success', await sendLuna());
+            }}
+        />
     </View>
   );
 }

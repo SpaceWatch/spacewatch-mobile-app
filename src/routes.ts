@@ -6,6 +6,7 @@ enum Routes {
 
   WALLET_BASE = "/wallet",
   WALLET_RECOVER = "/wallet/recover",
+  WALLET_NEW = "/wallet/new",
 }
 
 export default Routes;

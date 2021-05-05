@@ -3,6 +3,7 @@ import Routes from "./routes";
 import AlertList from "./views/AlertList";
 import Home from "./views/Home";
 import WalletRecovery from "./views/WalletRecovery";
+import WalletNew from "./views/WalletNew";
 import React from "react";
 
 const MainRouter = () => {
@@ -17,6 +18,9 @@ const MainRouter = () => {
         </Route>
         <Route path={Routes.WALLET_RECOVER} exact>
           <WalletRecovery />
+        </Route>
+        <Route path={Routes.WALLET_NEW} exact>
+          <WalletNew />
         </Route>
       </Switch>
     </NativeRouter>

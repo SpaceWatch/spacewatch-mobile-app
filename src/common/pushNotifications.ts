@@ -18,8 +18,8 @@ export const initNotifications = async (): Promise<string | undefined> => {
 export const scheduleNotification = async (title?: string, body?: string) => {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: title ? title : 'You just got liquidated on Anchor BEECH',
-      body: body ? body : 'Go repay your loan you degen',
+      title: title ? title : 'Title',
+      body: body ? body : 'Body',
       data: { data: 'goes here' },
     },
     trigger: {

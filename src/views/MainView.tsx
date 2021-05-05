@@ -1,11 +1,10 @@
-import * as Notifications from 'expo-notifications';
-import React, { useEffect } from 'react';
+import * as Notifications from "expo-notifications";
+import React, { useEffect } from "react";
 
-
-import { initNotifications } from '../common/pushNotifications';
-import { registerBackgroundTask } from '../common/backgroundTasks';
+import { initNotifications } from "../common/pushNotifications";
+import { registerBackgroundTask } from "../common/backgroundTasks";
 import MainRouter from "../MainRouter";
-
+import { View } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -20,9 +19,13 @@ export default function MainView() {
     const init = async () => {
       await initNotifications();
       await registerBackgroundTask();
-    }
+    };
     init();
   }, []);
 
-  return <MainRouter />;
+  return (
+    <View style={{ flex: 1, width: '100%' }}>
+      <MainRouter />
+    </View>
+  );
 }

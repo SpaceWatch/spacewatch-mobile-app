@@ -47,9 +47,23 @@ export interface AlertFieldValue extends AlertField {
   value: string; // We store all values as strings, even integers and floats
 }
 
+export interface Blockchain {
+  blockchainId: string;
+  name: string;
+  protocols: Record<string, Protocol>;
+  imgUrl: string;
+}
+
 // Configuration for the alert message to show to the user
 export interface NotificationConfig {
   title: string;
   body: string;
   // data?: any; // Pass arbitrary data to the app? Not sure if we want this yet
 }
+
+export interface Protocol {
+  protocolId: string;
+  name: string;
+  imgUrl: string;
+}
+

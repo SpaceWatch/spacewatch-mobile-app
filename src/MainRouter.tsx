@@ -4,6 +4,7 @@ import AlertList from "./views/AlertList";
 import Home from "./views/Home";
 import WalletRecovery from "./views/WalletRecovery";
 import React from "react";
+import AlertPage from "./views/AlertPage";
 
 const MainRouter = () => {
   return (
@@ -17,6 +18,9 @@ const MainRouter = () => {
         </Route>
         <Route path={Routes.WALLET_RECOVER} exact>
           <WalletRecovery />
+        </Route>
+        <Route path={Routes.ALERTS_PAGE} exact>
+          <AlertPage />
         </Route>
       </Switch>
     </NativeRouter>

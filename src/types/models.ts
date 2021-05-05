@@ -5,14 +5,14 @@
 /**
  * Please sort this in alphabatical order so that others can find duplicates if any exist
  */
-export enum WatcherKey {
+export enum AlertKey {
   TERRA__ANCHOR__LTV_RATIO = "TERRA__ANCHOR__IS_HIGH_LTV"
 };
 
-export type WatcherFieldKey = string;
+export type AlertFieldKey = string;
 
-export interface WatcherConfig {
-  key: WatcherKey; // Formatted as `blockchain.protocol.method`
+export interface AlertConfig {
+  key: AlertKey; // Formatted as `blockchain.protocol.method`
   blockchain: string; // eg. `terra`
   protocol: string; // eg. `anchor`, use keyword `base` for base layer queries
   method: string; // eg. `isHighLtv`
@@ -22,26 +22,26 @@ export interface WatcherConfig {
   // eg. Send an alert when my Anchor LTV is above x%
   description: string;
 
-  fields: WatcherField[];
+  fields: AlertField[];
 }
 
 // We store all fields as strings, even integers and floats
-export interface WatcherField {
-  key: WatcherFieldKey; // Should be unique among other fields belonging to the same `blockchain.protocol.method` watcher
+export interface AlertField {
+  key: AlertFieldKey; // Should be unique among other fields belonging to the same `blockchain.protocol.method` watcher
   name: string;
   description: string;
   validationRegex: string; // Regex string
 }
 
 
-export interface WatcherSubscription {
+export interface Subscription {
   // watcherAddress: string;
-  watcherConfig: WatcherConfig;
-  fieldValuesByKey: Record<WatcherFieldKey, FieldValue>;
+  alertConfig: AlertConfig;
+  fieldValuesByKey: Record<AlertFieldKey, AlertFieldValue>;
 }
 
-export interface FieldValue extends WatcherField {
-  key: WatcherFieldKey;
+export interface AlertFieldValue extends AlertField {
+  key: AlertFieldKey;
   name: string;
   description: string;
   validationRegex: string; // Regex string

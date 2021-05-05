@@ -24,7 +24,5 @@ export default function MainView() {
     init();
   }, []);
 
-  return (
-    <MainRouter />
-  );
+  return <MainRouter />;
 }

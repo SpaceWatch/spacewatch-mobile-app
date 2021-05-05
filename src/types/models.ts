@@ -6,8 +6,8 @@
  * Please sort this in alphabatical order so that others can find duplicates if any exist
  */
 export enum AlertKey {
-  TERRA__ANCHOR__LTV_RATIO = "TERRA__ANCHOR__IS_HIGH_LTV"
-};
+  TERRA__ANCHOR__LTV_RATIO = "TERRA__ANCHOR__IS_HIGH_LTV",
+}
 
 export type AlertFieldKey = string;
 
@@ -32,7 +32,6 @@ export interface AlertField {
   description: string;
   validationRegex: string; // Regex string
 }
-
 
 export interface Subscription {
   // watcherAddress: string;

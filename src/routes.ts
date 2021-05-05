@@ -1,11 +1,11 @@
 enum Routes {
-    BASE = '/',
+  BASE = "/",
 
-    HOME = '/home',
+  ALERTS_BASE = "/alerts",
+  LIST_ALL_ALERTS = "/alerts/all",
 
-    WATCHERS_BASE = '/watchers',
-    LIST_ALL_WATCHERS = '/watchers/all',
-
+  WALLET_BASE = "/wallet",
+  WALLET_RECOVER = "/wallet/recover",
 }
 
 export default Routes;

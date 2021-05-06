@@ -28,7 +28,7 @@ const Home = () => {
         }}
       />
       <Button
-        title="See all watchers"
+        title="See All Alerts"
         onPress={() => {
           history.push(Routes.LIST_ALL_ALERTS);
         }}

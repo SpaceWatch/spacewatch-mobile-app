@@ -31,7 +31,7 @@ const WalletNew = () => {
     await SecureStore.setItemAsync(key, value);
   }
 
-  const getValueFor = async (key: string) => {
+  const getValueFromKeyChain = async (key: string) => {
     try {
       const result = await SecureStore.getItemAsync(key);
       if (result) {
@@ -59,13 +59,15 @@ const WalletNew = () => {
     // console.log("are both keys equal? ", pkToEncrypt === decryptedPK);
 
     //save in keychain
-    await saveToKeyChain("encryptedPK", encryptedPK);
-    await saveToKeyChain("hashedPassword", hashedPassword);
+    if (await SecureStore.isAvailableAsync()) {
+      await saveToKeyChain("encryptedPK", encryptedPK);
+      await saveToKeyChain("hashedPassword", hashedPassword);
+    }
   };
 
   const getStoredData = async () => {
-    const hashedPassword = await getValueFor("hashedPassword");
-    const encryptedKey = await getValueFor("encryptedPK");
+    const hashedPassword = await getValueFromKeyChain("hashedPassword");
+    const encryptedKey = await getValueFromKeyChain("encryptedPK");
 
     // // logs to test
     // console.log("----------");
@@ -181,7 +183,7 @@ const WalletNew = () => {
             paddingLeft: 10,
           }}
           secureTextEntry={true}
-          onChangeText={setPassword}
+          onChangeText={setConfirmPassword}
           placeholder="Confirm Password"
         />
 

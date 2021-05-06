@@ -5,8 +5,10 @@ import Home from "./views/Home";
 import WalletRecovery from "./views/WalletRecovery";
 import WalletNew from "./views/WalletNew";
 import React from "react";
+import AlertPage from "./views/AlertPage";
 
 const MainRouter = () => {
+
   return (
     <NativeRouter>
       <Switch>
@@ -21,6 +23,9 @@ const MainRouter = () => {
         </Route>
         <Route path={Routes.WALLET_NEW} exact>
           <WalletNew />
+        </Route>
+        <Route path={Routes.ALERTS_PAGE} exact>
+          <AlertPage />
         </Route>
       </Switch>
     </NativeRouter>

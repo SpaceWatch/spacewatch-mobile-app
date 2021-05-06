@@ -28,6 +28,8 @@ const WalletRecovery = () => {
           borderStyle: "solid",
           borderWidth: 1,
           justifyContent: "center",
+          paddingLeft: 10,
+          marginTop: 50
         }}
         onChangeText={setMnemonic}
         placeholder="Enter Seed Phrase"
@@ -42,10 +44,11 @@ const WalletRecovery = () => {
         onPress={async () => {
           if(validateMnemonic(mnemonic)) {
             try {
+              //not sure which one to use
               const mk118 = new MnemonicKey({ mnemonic, coinType: 118 })
               const mk330 = new MnemonicKey({ mnemonic, coinType: 330 })
               console.log(mk330.accAddress);
-              //route to next page
+              //route to home page
               history.push(Routes.BASE);
             } catch (error) {
               console.error(error);

@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca981c9d-46e3-4454-97cf-f7ba246731a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/WalletNew.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/wordlist.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/testWallet.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/testWallet.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/WalletNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletNew.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +60,8 @@
       <updated>1620146454587</updated>
       <workItem from="1620146458409" duration="7789000" />
       <workItem from="1620208520347" duration="1495000" />
-      <workItem from="1620214230406" duration="8384000" />
+      <workItem from="1620214230406" duration="8463000" />
+      <workItem from="1620229003168" duration="20185000" />
     </task>
     <servers />
   </component>
@@ -79,6 +79,18 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/views/WalletNew.tsx</url>
+          <line>95</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

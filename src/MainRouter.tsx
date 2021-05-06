@@ -1,18 +1,30 @@
-import { Route, Switch, NativeRouter } from "react-router-native";
+import { Route, Switch, NativeRouter, useHistory } from "react-router-native";
 import Routes from "./routes";
 import AlertList from "./views/AlertList";
 import Home from "./views/Home";
 import WalletRecovery from "./views/WalletRecovery";
 import WalletNew from "./views/WalletNew";
-import React from "react";
+import React, { useEffect } from "react";
 import AlertPage from "./views/AlertPage";
+import * as SecureStore from 'expo-secure-store';
 import AlertSubscribePage from "./views/AlertSubscribePage";
 
-
 const MainRouter = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const handleRouting = async () => {
+      const hasEncryptedPK = await SecureStore.getItemAsync("encryptedPK");
+      if (hasEncryptedPK) {
+        history.replace(Routes.LIST_ALL_ALERTS);
+      } else {
+        history.replace(Routes.BASE)
+      }
+    }
+    handleRouting();
+  }, [])
 
   return (
-    <NativeRouter>
       <Switch>
         <Route path={Routes.BASE} exact>
           <Home />
@@ -33,7 +45,6 @@ const MainRouter = () => {
           <AlertSubscribePage />
         </Route>
       </Switch>
-    </NativeRouter>
   );
 };
 

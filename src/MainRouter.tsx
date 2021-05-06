@@ -6,6 +6,8 @@ import WalletRecovery from "./views/WalletRecovery";
 import WalletNew from "./views/WalletNew";
 import React from "react";
 import AlertPage from "./views/AlertPage";
+import AlertSubscribePage from "./views/AlertSubscribePage";
+
 
 const MainRouter = () => {
 
@@ -26,6 +28,9 @@ const MainRouter = () => {
         </Route>
         <Route path={Routes.ALERTS_PAGE} exact>
           <AlertPage />
+        </Route>
+        <Route path={Routes.ALERTS_SUBSCRIBE_PAGE} exact>
+          <AlertSubscribePage />
         </Route>
       </Switch>
     </NativeRouter>

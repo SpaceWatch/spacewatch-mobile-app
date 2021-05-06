@@ -5,6 +5,7 @@ import { initNotifications } from "../common/pushNotifications";
 import { registerBackgroundTask } from "../common/backgroundTasks";
 import MainRouter from "../MainRouter";
 import { View } from "react-native";
+import { NativeRouter } from "react-router-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -24,8 +25,10 @@ export default function MainView() {
   }, []);
 
   return (
-    <View style={{ flex: 1, width: '100%' }}>
-      <MainRouter />
+    <View style={{ flex: 1, width: "100%" }}>
+      <NativeRouter>
+        <MainRouter />
+      </NativeRouter>
     </View>
   );
 }

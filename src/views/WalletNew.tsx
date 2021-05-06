@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-native";
-import { Button, View, TextInput, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Button, View, TextInput, Text, TouchableOpacity } from "react-native";
+import Clipboard from 'expo-clipboard';
 import Routes from "../routes";
 import { MnemonicKey, Wallet } from "@terra-money/terra.js";
 import wordList from "../wordlist.json";
@@ -9,6 +10,7 @@ import { terra } from "../common/testWallet";
 import { encrypt, decrypt } from "@terra-money/key-utils";
 import sha256 from "crypto-js/sha256";
 import * as SecureStore from 'expo-secure-store';
+import { deleteItemAsync } from "expo-secure-store";
 
 const WalletNew = () => {
   const history = useHistory();
@@ -17,15 +19,19 @@ const WalletNew = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-
   const generateMnemonic = () => {
-    const WORD_LIST_NUM_WORDS = 2048;
     const MNEMONIC_NUM_WORDS = 24;
     const newMnemonicString = _.sampleSize(wordList, MNEMONIC_NUM_WORDS).join(
       " "
     );
     setMnemonicString(newMnemonicString);
   };
+
+  const copyToClipboard = () => {
+    if (mnemonicString) {
+      Clipboard.setString(mnemonicString);
+    }
+  }
 
   const saveToKeyChain = async (key: string, value: string) => {
     await SecureStore.setItemAsync(key, value);
@@ -43,25 +49,31 @@ const WalletNew = () => {
   }
 
   const createAndSaveWallet = async () => {
-    //hash password
-    const hashedPassword = JSON.stringify(sha256(password));
-    console.log(`Hashed password is ${hashedPassword}`);
+    if (password === confirmPassword && password.length >= 10) {
+      //hash password
+      const hashedPassword = JSON.stringify(sha256(password));
+      console.log(`Hashed password is ${hashedPassword}`);
 
-    //get and encrypt private key
-    const mk = new MnemonicKey({ mnemonic: mnemonicString });
-    Uint8Array.from(mk.privateKey);
-    const pkToEncrypt = String.fromCharCode(...Uint8Array.from(mk.privateKey));
-    const encryptedPK = encrypt(pkToEncrypt, password);
-    // console.log("Encrypted private key is", encryptedPK);
+      //get private key
+      const mk = new MnemonicKey({ mnemonic: mnemonicString });
+      Uint8Array.from(mk.privateKey);
+      const pkToEncrypt = String.fromCharCode(...Uint8Array.from(mk.privateKey));
 
-    // const decryptedPK = decrypt(encryptedPK, password);
-    // console.log("decrypted private key", decryptedPK);
-    // console.log("are both keys equal? ", pkToEncrypt === decryptedPK);
+      //encrypt private key
+      const encryptedPK = encrypt(pkToEncrypt, password);
+      // console.log("Encrypted private key is", encryptedPK);
+      // const decryptedPK = decrypt(encryptedPK, password);
+      // console.log("decrypted private key", decryptedPK);
+      // console.log("are both keys equal? ", pkToEncrypt === decryptedPK);
 
-    //save in keychain
-    if (await SecureStore.isAvailableAsync()) {
-      await saveToKeyChain("encryptedPK", encryptedPK);
-      await saveToKeyChain("hashedPassword", hashedPassword);
+      //save in keychain
+      if (await SecureStore.isAvailableAsync()) {
+        await saveToKeyChain("encryptedPK", encryptedPK);
+        await saveToKeyChain("hashedPassword", hashedPassword);
+      }
+
+      const wallet = terra.wallet(mk);
+      console.log('Created new wallet, wallet address is ', wallet.key.accAddress);
     }
   };
 
@@ -69,12 +81,22 @@ const WalletNew = () => {
     const hashedPassword = await getValueFromKeyChain("hashedPassword");
     const encryptedKey = await getValueFromKeyChain("encryptedPK");
 
-    // // logs to test
-    // console.log("----------");
-    // console.log("getting keychain data....");
-    // console.log("obtained hashed password: ", hashedPassword);
-    // console.log("obtained encrypted key: ", encryptedKey);
+    // logs to test
+    console.log("----------");
+    console.log("getting keychain data....");
+    console.log("obtained hashed password: ", hashedPassword);
+    console.log("obtained encrypted key: ", encryptedKey);
+
+    const hashedTestPassword = JSON.stringify(sha256("password11"));
+    console.log("hashed password matches sha256(`password')? ", hashedTestPassword === hashedPassword);
   }
+
+  const wipedStoredData = async () => {
+    await deleteItemAsync("hashedPassword");
+    await deleteItemAsync("encryptedPK");
+    console.log("wiped stored data");
+  }
+
 
   useEffect(() => {
     generateMnemonic();
@@ -115,7 +137,7 @@ const WalletNew = () => {
             color: "red"
           }}
         >
-          Store Seed Phrase in a secure place bla bla bla
+          If you lose your seed phrase it's gone forever, this app doesn't store any data.
         </Text>
 
         <Text
@@ -132,6 +154,13 @@ const WalletNew = () => {
         >
           {mnemonicString}
         </Text>
+
+        <TouchableOpacity
+          onPress={() => copyToClipboard()}
+          style={{ marginBottom: 10 }}
+        >
+          <Text style={{color: "blue"}}>Copy</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           onPress={generateMnemonic}
@@ -170,6 +199,16 @@ const WalletNew = () => {
           placeholder="Password"
         />
 
+        {(password.length > 0 && password.length < 10) &&
+        <Text
+          style={{
+            color: "red",
+          }}
+        >
+          Password must be longer than 10 characters
+        </Text>
+        }
+
         <TextInput
           numberOfLines={1}
           style={{
@@ -179,6 +218,7 @@ const WalletNew = () => {
             borderColor: password === confirmPassword ? "gray" : "red",
             borderStyle: "solid",
             borderWidth: 1,
+            marginTop: 5,
             marginBottom: 10,
             paddingLeft: 10,
           }}
@@ -212,6 +252,13 @@ const WalletNew = () => {
         title="Get Keychain Data"
         onPress={async () => {
           await getStoredData();
+        }}
+      />
+
+      <Button
+        title="Wipe Keychain Data"
+        onPress={async () => {
+          await wipedStoredData();
         }}
       />
 

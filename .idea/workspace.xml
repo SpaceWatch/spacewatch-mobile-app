@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca981c9d-46e3-4454-97cf-f7ba246731a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/logos/ANC-Logo_50x50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/logos/Mirror-Logo_50x50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/logos/Terra-Logo_50x50.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/alerts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/blockchains.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/styles/styles.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AlertPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/pushNotifications.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/pushNotifications.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AlertList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AlertList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/MainView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/WalletNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletNew.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +60,7 @@
       <workItem from="1620146458409" duration="7789000" />
       <workItem from="1620208520347" duration="1495000" />
       <workItem from="1620214230406" duration="8463000" />
-      <workItem from="1620229003168" duration="21714000" />
+      <workItem from="1620229003168" duration="30199000" />
     </task>
     <servers />
   </component>
@@ -94,7 +84,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/views/WalletNew.tsx</url>
-          <line>97</line>
+          <line>119</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

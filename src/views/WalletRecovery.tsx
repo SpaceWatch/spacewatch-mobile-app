@@ -3,8 +3,8 @@ import { Button, View, TextInput, Text } from "react-native";
 import React, { useState } from "react";
 import Routes from "../routes";
 import { validateMnemonic, getMnemonicKeys } from "@terra-money/key-utils";
-import { tequilaConfig } from "../common/testWallet";
 import { MnemonicKey } from "@terra-money/terra.js";
+import { Colors, FontSize, FontWeight } from "../common/styles/styles";
 
 const WalletRecovery = () => {
   const history = useHistory();
@@ -23,8 +23,26 @@ const WalletRecovery = () => {
         flex: 1,
         alignItems: "center",
         justifyContent: "space-around",
+        backgroundColor: Colors.GRAY_100,
       }}
     >
+      <View
+        style={{
+          backgroundColor: Colors.BLUE_100,
+          justifyContent: "center",
+          width: '100%',
+          alignItems: 'center',
+          height: '20%',
+        }}
+      >
+        <Text style={{
+          fontSize: FontSize.LG,
+          fontWeight: FontWeight.BOLD,
+          color: Colors.GRAY_700
+        }}>
+          Recover Wallet
+        </Text>
+      </View>
       <View>
         <TextInput
           numberOfLines={10}
@@ -55,10 +73,7 @@ const WalletRecovery = () => {
         onPress={async () => {
           if(validateMnemonic(mnemonicInput)) {
             try {
-              //not sure which one to use
               const mk330 = new MnemonicKey({ mnemonic: mnemonicInput, coinType: 330 })
-              const mk118 = new MnemonicKey({ mnemonic: mnemonicInput, coinType: 118 })
-              console.log('current mk118 wallet address is ', mk118.accAddress);
               console.log('current mk330 wallet address is ', mk330.accAddress);
               history.push(Routes.LIST_ALL_ALERTS);
             } catch (error) {
@@ -68,9 +83,9 @@ const WalletRecovery = () => {
         }}
       />
       <Button
-        title="Back To Home (Wallet Recovery)"
+        title="Back To Home"
         onPress={async () => {
-          history.push(Routes.BASE);
+          history.goBack();
         }}
       />
     </View>

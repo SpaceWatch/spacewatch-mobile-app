@@ -11,6 +11,7 @@ import { encrypt, decrypt } from "@terra-money/key-utils";
 import sha256 from "crypto-js/sha256";
 import * as SecureStore from 'expo-secure-store';
 import { deleteItemAsync } from "expo-secure-store";
+import { Colors } from "../common/styles/styles";
 
 const WalletNew = () => {
   const history = useHistory();
@@ -113,13 +114,14 @@ const WalletNew = () => {
         flex: 1,
         alignItems: "center",
         justifyContent: "space-around",
+        backgroundColor: Colors.GRAY_200
       }}
     >
       <View
         style={{
           height: 35,
           alignItems: "center",
-          justifyContent: "space-around"
+          justifyContent: "space-around",
         }}
       />
 
@@ -249,21 +251,21 @@ const WalletNew = () => {
       />
 
       <Button
-        title="Get Keychain Data"
+        title="Get Keychain Data (For Testing)"
         onPress={async () => {
           await getStoredData();
         }}
       />
 
       <Button
-        title="Wipe Keychain Data"
+        title="Wipe Keychain Data (For Testing)"
         onPress={async () => {
           await wipedStoredData();
         }}
       />
 
       <Button
-        title="Back To Home (Wallet New)"
+        title="Back To Home"
         onPress={async () => {
           history.push(Routes.BASE);
         }}

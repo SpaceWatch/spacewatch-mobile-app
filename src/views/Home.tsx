@@ -34,7 +34,13 @@ const Home = () => {
         }}
       />
       <Button
-        title="Recovery Wallet"
+        title="Create New Wallet"
+        onPress={() => {
+          history.push(Routes.WALLET_NEW);
+        }}
+      />
+      <Button
+        title="Recover Wallet"
         onPress={() => {
           history.push(Routes.WALLET_RECOVER);
         }}

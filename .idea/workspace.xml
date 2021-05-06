@@ -2,13 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca981c9d-46e3-4454-97cf-f7ba246731a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.prettierrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/common/Asteroid.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/AlertSubscribePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/MainView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/WalletNew.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletNew.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WalletRecovery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/alerts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/alerts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AlertList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AlertList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AlertPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AlertPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +92,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/views/WalletNew.tsx</url>
           <line>119</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

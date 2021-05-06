@@ -13,20 +13,20 @@ export const Alerts: Record<string, AlertConfig> = {
     protocol: Blockchains.Terra.protocols.Anchor.protocolId,
     method: "isHighLtv",
 
-    name: "Anchor LTV is too high",
+    name: "Anchor LTV Alert",
     description: "Send an alert when my Anchor LTV is above x%",
 
     fields: [
       {
         key: "walletAddress",
         name: "Wallet Address",
-        description: "Wallet Address",
+        description: "Wallet Address Description",
         validationRegex: "terra\\S*",
       },
       {
         key: "ltvRatio",
         name: "LTV Ratio",
-        description: "Notify me when my LTV ratio reaches a certain percantage",
+        description: "LTV % to notify me at",
         validationRegex: "[0-9][0-9]%",
       },
     ],

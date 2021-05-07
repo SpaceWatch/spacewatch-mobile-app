@@ -41,6 +41,7 @@ export const getWalletFromPassword = async (password: string) => {
       const rk = new RawKey(bDecryptedPK);
       const walletRK = terra.wallet(rk);
       console.log('Logged into wallet, wallet address is ', walletRK.key.accAddress);
+      return walletRK;
     } else {
        throw new Error('Cannot fetch wallet, wrong password input');
     }
@@ -50,6 +51,7 @@ export const getWalletFromPrivateKey = (privateKey: Buffer) => {
     const rk = new RawKey(privateKey);
     const walletRK = terra.wallet(rk);
     console.log('Accessed wallet, wallet address is ', walletRK.key.accAddress);
+    return walletRK;
 }
 
 // export const ghostWallet = terra.wallet(new MnemonicKey());

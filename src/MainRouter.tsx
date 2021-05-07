@@ -9,6 +9,8 @@ import React, { useEffect } from "react";
 import AlertPage from "./views/AlertPage";
 import * as SecureStore from 'expo-secure-store';
 import AlertSubscribePage from "./views/AlertSubscribePage";
+import SubscriptionList from "./views/SubscriptionList";
+import AlertPageWithUnSubscribe from "./views/AlertPageWithUnsubscribeButton";
 
 const MainRouter = () => {
   const history = useHistory();
@@ -42,12 +44,18 @@ const MainRouter = () => {
         <Route path={Routes.WALLET_NEW} exact>
           <WalletNew />
         </Route>
-        <Route path={Routes.ALERTS_PAGE} exact>
+          <Route path={Routes.ALERTS_SUBSCRIBE_PAGE}>
+              <AlertSubscribePage />
+          </Route>
+        <Route path={Routes.ALERTS_PAGE}>
           <AlertPage />
         </Route>
-        <Route path={Routes.ALERTS_SUBSCRIBE_PAGE} exact>
-          <AlertSubscribePage />
-        </Route>
+      <Route path={Routes.SUBSCRIPTION_LIST} exact>
+          <SubscriptionList />
+      </Route>
+          <Route path={Routes.ALERTS_PAGE_WITH_UNSUBSCRIBE} exact>
+              <AlertPageWithUnSubscribe/>
+          </Route>
       </Switch>
   );
 };

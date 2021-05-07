@@ -20,7 +20,7 @@ export const Alerts: Record<string, Alert> = {
       {
         fieldKey: "walletAddress",
         name: "Wallet Address",
-        description: "Wallet Address Description",
+        description: "Address of your Terra wallet starting with 'terra'",
         validationRegex: "terra\\S*",
       },
       {

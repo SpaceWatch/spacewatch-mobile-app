@@ -2,19 +2,50 @@ import { useHistory } from "react-router-native";
 import { Button, View, TextInput, Text } from "react-native";
 import React, { useState } from "react";
 import Routes from "../routes";
-import { validateMnemonic, getMnemonicKeys } from "@terra-money/key-utils";
+import { validateMnemonic, encrypt, } from "@terra-money/key-utils";
 import { MnemonicKey } from "@terra-money/terra.js";
 import { Colors, FontSize, FontWeight } from "../common/styles/styles";
+import * as SecureStore from "expo-secure-store";
+import sha256 from "crypto-js/sha256";
 
 const WalletRecovery = () => {
   const history = useHistory();
   const [mnemonicInput, setMnemonicInput] = useState("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
 
   const isMnemonicValid = () => {
     if (validateMnemonic(mnemonicInput) || mnemonicInput.length === 0) {
       return true;
     }
     return false;
+  }
+
+  const recoverAndSave = async (mk: MnemonicKey) => {
+    if (validateMnemonic(mnemonicInput) &&
+      newPassword === confirmNewPassword &&
+      newPassword.length >= 10
+    ) {
+      //hash password
+      const hashedPassword = JSON.stringify(sha256(newPassword));
+
+      //encrypt private key
+      const pkToEncrypt = String.fromCharCode(...Uint8Array.from(mk.privateKey));
+      const encryptedPK = encrypt(pkToEncrypt, newPassword);
+
+      //if SecureStore exits, save in keychain, otherwise cannot proceed
+      if (await SecureStore.isAvailableAsync()) {
+        await SecureStore.setItemAsync("encryptedPK", encryptedPK);
+        await SecureStore.setItemAsync("hashedPassword", hashedPassword);
+        history.push(Routes.LIST_ALL_ALERTS);
+        console.log("Wallet imported, saved data in keychain")
+      } else {
+        throw Error('SecureStore does not exist on this device.. cannot proceed further')
+      }
+
+    } else {
+      console.log('PASSWORD INPUT INCORRECT')
+    }
   }
 
   return (
@@ -48,7 +79,7 @@ const WalletRecovery = () => {
           numberOfLines={10}
           style={{
             width: 300,
-            height: 300,
+            height: 50,
             borderRadius: 20,
             borderColor: isMnemonicValid() ? "gray" : "red",
             borderStyle: "solid",
@@ -68,18 +99,81 @@ const WalletRecovery = () => {
         }
       </View>
 
+      <View
+        style={{
+          flex: 1 / 4,
+          height: 200,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+
+        <TextInput
+          numberOfLines={1}
+          style={{
+            width: 300,
+            height: 30,
+            borderRadius: 20,
+            borderColor: newPassword === confirmNewPassword ? "gray" : "red",
+            borderStyle: "solid",
+            borderWidth: 1,
+            marginBottom: 10,
+            paddingLeft: 10,
+          }}
+          secureTextEntry={true}
+          onChangeText={setNewPassword}
+          placeholder="New Password"
+        />
+
+        {(newPassword.length > 0 && newPassword.length < 10) &&
+        <Text
+          style={{
+            color: "red",
+          }}
+        >
+          Password must be longer than 10 characters
+        </Text>
+        }
+
+        <TextInput
+          numberOfLines={1}
+          style={{
+            width: 300,
+            height: 30,
+            borderRadius: 20,
+            borderColor: newPassword === confirmNewPassword ? "gray" : "red",
+            borderStyle: "solid",
+            borderWidth: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            paddingLeft: 10,
+          }}
+          secureTextEntry={true}
+          onChangeText={setConfirmNewPassword}
+          placeholder="Confirm New Password"
+        />
+
+        {newPassword !== confirmNewPassword &&
+        <Text
+          style={{
+            color: "red",
+          }}
+        >
+          Passwords does not match!
+        </Text>
+        }
+
+      </View>
+
       <Button
         title="Recover Wallet"
         onPress={async () => {
-          if(validateMnemonic(mnemonicInput)) {
             try {
-              const mk330 = new MnemonicKey({ mnemonic: mnemonicInput, coinType: 330 })
-              console.log('current mk330 wallet address is ', mk330.accAddress);
-              history.push(Routes.LIST_ALL_ALERTS);
+              const mk = new MnemonicKey({ mnemonic: mnemonicInput })
+              await recoverAndSave(mk);
             } catch (error) {
               console.error(error);
             }
-          };
         }}
       />
       <Button

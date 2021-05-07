@@ -9,12 +9,12 @@ import {
 } from "../common/styles/styles";
 import { Alerts } from "../common/alerts";
 import React, { useState } from "react";
-import { AlertField, AlertFieldValue } from "../types/models";
+import { AlertField, SubscriptionFieldValue } from "../types/models";
 
 const AlertSubscribePage = () => {
   const history = useHistory();
   const alertFields = Alerts.TERRA__ANCHOR__LTV_RATIO.fields;
-  const [alertFieldValues, setAlertFieldValues] = useState<AlertFieldValue[]>(
+  const [alertFieldValues, setAlertFieldValues] = useState<SubscriptionFieldValue[]>(
     alertFields.map((alertField: AlertField) => ({ ...alertField, value: "" }))
   );
 
@@ -38,7 +38,7 @@ const AlertSubscribePage = () => {
         >
           {alertFields.map((field: AlertField) => {
             return (
-              <View key={field.key} style={{ marginTop: Spacing.LG }}>
+              <View key={field.fieldKey} style={{ marginTop: Spacing.LG }}>
                 <Text
                   style={{
                     fontSize: FontSize.LG,
@@ -65,8 +65,8 @@ const AlertSubscribePage = () => {
                   )}
                   onChangeText={(newText: string) => {
                     setAlertFieldValues(
-                      alertFieldValues.map((fieldValue: AlertFieldValue) => {
-                        if (fieldValue.key === field.key) {
+                      alertFieldValues.map((fieldValue: SubscriptionFieldValue) => {
+                        if (fieldValue.fieldKey === field.fieldKey) {
                           return {
                             ...fieldValue,
                             value: newText,

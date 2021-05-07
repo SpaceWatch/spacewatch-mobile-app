@@ -1,14 +1,14 @@
 import {
-  AlertConfig,
+  Alert,
   AlertField,
   AlertFieldKey,
   AlertKey,
 } from "../types/models";
 import { Blockchains } from "./blockchains";
 
-export const Alerts: Record<string, AlertConfig> = {
+export const Alerts: Record<string, Alert> = {
   TERRA__ANCHOR__LTV_RATIO: {
-    key: AlertKey.TERRA__ANCHOR__LTV_RATIO,
+    alertKey: AlertKey.TERRA__ANCHOR__LTV_RATIO,
     blockchain: Blockchains.Terra.blockchainId,
     protocol: Blockchains.Terra.protocols.Anchor.protocolId,
     method: "isHighLtv",
@@ -18,13 +18,13 @@ export const Alerts: Record<string, AlertConfig> = {
 
     fields: [
       {
-        key: "walletAddress",
+        fieldKey: "walletAddress",
         name: "Wallet Address",
         description: "Wallet Address Description",
         validationRegex: "terra\\S*",
       },
       {
-        key: "ltvRatio",
+        fieldKey: "ltvRatio",
         name: "LTV Ratio",
         description: "LTV % to notify me at",
         validationRegex: "[0-9][0-9]%",

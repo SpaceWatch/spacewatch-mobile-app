@@ -6,13 +6,13 @@
  * Please sort this in alphabatical order so that others can find duplicates if any exist
  */
 export enum AlertKey {
-  TERRA__ANCHOR__LTV_RATIO = "TERRA__ANCHOR__IS_HIGH_LTV",
+  TERRA__ANCHOR__LTV_RATIO = 'TERRA__ANCHOR__IS_HIGH_LTV',
 }
 
 export type AlertFieldKey = string;
 
-export interface AlertConfig {
-  key: AlertKey; // Formatted as `blockchain.protocol.method`
+export interface Alert {
+  alertKey: AlertKey; // Formatted as `blockchain.protocol.method`
   blockchain: string; // eg. `terra`
   protocol: string; // eg. `anchor`, use keyword `base` for base layer queries
   method: string; // eg. `isHighLtv`
@@ -27,20 +27,28 @@ export interface AlertConfig {
 
 // We store all fields as strings, even integers and floats
 export interface AlertField {
-  key: AlertFieldKey; // Should be unique among other fields belonging to the same `blockchain.protocol.method` watcher
+  fieldKey: AlertFieldKey; // Should be unique among other fields belonging to the same `blockchain.protocol.method` watcher
   name: string;
   description: string;
   validationRegex: string; // Regex string
 }
 
-export interface Subscription {
-  // watcherAddress: string;
-  alertConfig: AlertConfig;
-  fieldValuesByKey: Record<AlertFieldKey, AlertFieldValue>;
+export interface Subscription extends Alert {
+  alertKey: AlertKey; // Formatted as `blockchain.protocol.method`
+  blockchain: string; // eg. `terra`
+  protocol: string; // eg. `anchor`, use keyword `base` for base layer queries
+  method: string; // eg. `isHighLtv`
+
+  // Alert me when: Anchor LTV is too high
+  name: string;
+  // eg. Send an alert when my Anchor LTV is above x%
+  description: string;
+
+  fields: SubscriptionFieldValue[];
 }
 
-export interface AlertFieldValue extends AlertField {
-  key: AlertFieldKey;
+export interface SubscriptionFieldValue extends AlertField {
+  fieldKey: AlertFieldKey;
   name: string;
   description: string;
   validationRegex: string; // Regex string
@@ -67,3 +75,12 @@ export interface Protocol {
   imgUrl: string;
 }
 
+export interface QueryAlertsResponse {}
+
+export interface QuerySubscriptionsResponse {
+  alertKey: AlertKey;
+  fields: {
+    fieldKey: string;
+    value: string;
+  }[];
+}

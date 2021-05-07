@@ -34,10 +34,6 @@ const WalletNew = () => {
     }
   }
 
-  const saveToKeyChain = async (key: string, value: string) => {
-    await SecureStore.setItemAsync(key, value);
-  }
-
   const getValueFromKeyChain = async (key: string) => {
     try {
       const result = await SecureStore.getItemAsync(key);
@@ -53,24 +49,19 @@ const WalletNew = () => {
     if (password === confirmPassword && password.length >= 10) {
       //hash password
       const hashedPassword = JSON.stringify(sha256(password));
-      console.log(`Hashed password is ${hashedPassword}`);
 
       //get private key
       const mk = new MnemonicKey({ mnemonic: mnemonicString });
-      Uint8Array.from(mk.privateKey);
       const pkToEncrypt = String.fromCharCode(...Uint8Array.from(mk.privateKey));
 
       //encrypt private key
       const encryptedPK = encrypt(pkToEncrypt, password);
-      // console.log("Encrypted private key is", encryptedPK);
-      // const decryptedPK = decrypt(encryptedPK, password);
-      // console.log("decrypted private key", decryptedPK);
-      // console.log("are both keys equal? ", pkToEncrypt === decryptedPK);
+      const decryptedPK = decrypt(encryptedPK, password);
 
       //save in keychain
       if (await SecureStore.isAvailableAsync()) {
-        await saveToKeyChain("encryptedPK", encryptedPK);
-        await saveToKeyChain("hashedPassword", hashedPassword);
+        await SecureStore.setItemAsync("encryptedPK", encryptedPK);
+        await SecureStore.setItemAsync("hashedPassword", hashedPassword);
       }
 
       const wallet = terra.wallet(mk);
@@ -78,6 +69,7 @@ const WalletNew = () => {
     }
   };
 
+  //used to quickly fetch keychain data
   const getStoredData = async () => {
     const hashedPassword = await getValueFromKeyChain("hashedPassword");
     const encryptedKey = await getValueFromKeyChain("encryptedPK");
@@ -92,6 +84,7 @@ const WalletNew = () => {
     console.log("hashed password matches sha256(`password')? ", hashedTestPassword === hashedPassword);
   }
 
+  //used to quickly delete keychain data
   const wipedStoredData = async () => {
     await deleteItemAsync("hashedPassword");
     await deleteItemAsync("encryptedPK");
@@ -244,8 +237,10 @@ const WalletNew = () => {
       <Button
         title="Create Wallet"
         onPress={async () => {
-          if (password === confirmPassword) {
+          try {
             await createAndSaveWallet();
+          } catch (error) {
+            console.error(error);
           }
         }}
       />

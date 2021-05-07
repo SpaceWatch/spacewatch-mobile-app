@@ -2,6 +2,7 @@ import { Route, Switch, NativeRouter, useHistory } from "react-router-native";
 import Routes from "./routes";
 import AlertList from "./views/AlertList";
 import Home from "./views/Home";
+import WalletAuth from "./views/WalletAuth";
 import WalletRecovery from "./views/WalletRecovery";
 import WalletNew from "./views/WalletNew";
 import React, { useEffect } from "react";
@@ -16,7 +17,7 @@ const MainRouter = () => {
     const handleRouting = async () => {
       const hasEncryptedPK = await SecureStore.getItemAsync("encryptedPK");
       if (hasEncryptedPK) {
-        history.replace(Routes.LIST_ALL_ALERTS);
+        history.replace(Routes.WALLET_AUTH);
       } else {
         history.replace(Routes.BASE)
       }
@@ -31,6 +32,9 @@ const MainRouter = () => {
         </Route>
         <Route path={Routes.LIST_ALL_ALERTS} exact>
           <AlertList />
+        </Route>
+        <Route path={Routes.WALLET_AUTH} exact>
+          <WalletAuth />
         </Route>
         <Route path={Routes.WALLET_RECOVER} exact>
           <WalletRecovery />

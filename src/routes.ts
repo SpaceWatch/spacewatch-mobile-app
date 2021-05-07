@@ -7,6 +7,7 @@ enum Routes {
   ALERTS_SUBSCRIBE_PAGE = "/alerts/subscribe/",
 
   WALLET_BASE = "/wallet",
+  WALLET_AUTH = "/wallet/auth",
   WALLET_RECOVER = "/wallet/recover",
   WALLET_NEW = "/wallet/new",
 }

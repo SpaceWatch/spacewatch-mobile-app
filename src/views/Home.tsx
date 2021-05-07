@@ -65,6 +65,12 @@ const Home = () => {
           history.push(Routes.LIST_ALL_ALERTS);
         }}
       />
+    <Button
+        title="My Subscriptions"
+        onPress={() => {
+            history.push(Routes.SUBSCRIPTION_LIST);
+        }}
+    />
       <Button
         title="Create New Wallet"
         onPress={() => {
